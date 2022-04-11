@@ -1,20 +1,56 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="medium">
+    <ion-title class="ion-text-center">
+      Mis Tareas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="selected" [(ngModel)]="selected" color="dark">
+    <ion-segment-button value="incomplete" layout="icon-top">
+      <ion-icon name="hourglass-outline"></ion-icon>
+      <ion-label>Pendientes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="complete" layout="icon-top">
+      <ion-icon name="trophy"></ion-icon>
+      <ion-label>Terminadas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div>
+    <ion-card *ngFor="let item of items">
+      <ion-card-content>
+        <div class="ion-padding">
+          <ion-text class="ion-text-justify" style="font-size: 18px;">{{item.detalle}}</ion-text><br>
+          <ion-badge color="dark" *ngIf="item.estado == true">Pendiente</ion-badge>
+          <ion-badge color="dark" *ngIf="item.estado == false">Terminada</ion-badge>
+        </div>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col *ngIf="item.estado == true">
+            <ion-button expand="block" color="medium" fill="outline" (click)="terminar(item)">
+              Terminada
+            </ion-button>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button expand="block" color="medium" (click)="modalEdit(item)">
+              <ion-icon name="create-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button expand="block" color="dark" (click)="eliminar(item.id)">
+              <ion-icon name="trash-bin-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="ligth" (click)="modalRegister()">
+      <ion-icon name="add" size="large"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

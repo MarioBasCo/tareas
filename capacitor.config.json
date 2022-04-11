@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.stip.apptareas",
 	"appName": "tareas",
 	"webDir": "www",
 	"bundledWebRuntime": false

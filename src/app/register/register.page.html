@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Formulario de {{titulo}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="close" size="large" color="danger" (click)="cerrarModal()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form id="form" #formulario="ngForm" (ngSubmit)="guardar()">
+    <ion-item>
+      <ion-label>
+        Nombre:
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="detalle" name="detalle" required></ion-input>
+    </ion-item>
+    
+    <div class="ion-text-center">
+      <ion-button type="submit" color="dark" [disabled]="formulario.invalid">Guardar</ion-button>
+    </div>
+  </form>
+</ion-content>
